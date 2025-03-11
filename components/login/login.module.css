@@ -1,0 +1,164 @@
+.pageWrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+}
+
+.bgImage {
+  object-fit: cover;
+}
+
+.formSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.formContainer {
+  background: linear-gradient(
+    153.61deg,
+    rgba(239, 239, 239, 0.6) 0%,
+    rgba(239, 239, 239, 0.08) 100%
+  );
+  backdrop-filter: blur(25px);
+  padding: 1.2rem 3rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.signupText {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.signupLink {
+  color: #1c4a2a;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.2rem 0.75rem;
+  transition: border-color 0.3s ease;
+}
+
+.inputWrapper:focus-within {
+  border-color: #1c4a2a;
+}
+
+.inputWrapper input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #1c4a2a;
+}
+
+.loginBtn {
+  padding: 0.75rem;
+  background-color: #1c4a2a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: #173e23;
+}
+
+.resetBtn {
+  padding: 0.75rem;
+  background-color: #c3a27c;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.resetBtn:hover {
+  background-color: #b08f6a;
+}
+
+.footerLinks {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.forgotLink {
+  font-size: 0.9rem;
+  color: #333333;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 500px) {
+  .formContainer {
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .loginBtn,
+  .resetBtn {
+    font-size: 0.95rem;
+  }
+}
