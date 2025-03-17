@@ -27,7 +27,7 @@
   
   .description {
     text-align: center;
-    color: #666;
+    color: #8C8C8C;
     margin-bottom: 2rem;
   }
   
@@ -46,21 +46,6 @@
     position: relative;
   }
   
-  /* .resetWrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-  }
-  
-  .resetBtn {
-    background-color: transparent;
-    color: #007B5E;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1rem;
-  }
-   */
   .resetBtn:hover {
     text-decoration: underline;
   }

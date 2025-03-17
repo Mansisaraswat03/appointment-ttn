@@ -1,7 +1,8 @@
 .searchBar {
     display: flex;
-    margin: 2rem auto;
-    max-width: 600px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   
   .input {
