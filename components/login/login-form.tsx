@@ -84,12 +84,6 @@ const Login = () => {
                 className={styles.eyeToggleBtn}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
-                {/* <Image
-                  src={showPassword ? '/images/eye-off.svg' : '/images/Eye.svg'}
-                  alt={showPassword ? 'Hide password icon' : 'Show password icon'}
-                  width={20}
-                  height={20}
-                /> */}
                 {showPassword ?  <EyeOff className={styles.icon}/> : <Eye className={styles.icon}/>}
               </button>
             </div>
