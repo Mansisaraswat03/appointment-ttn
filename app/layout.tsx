@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: 'MedCare',
@@ -19,6 +20,7 @@ export default function RootLayout({
       >
         <Navbar/>
         {children}
+        <Toaster position="top-right" reverseOrder={false} />
         <Footer/>
       </body>
     </html>
