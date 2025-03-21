@@ -149,7 +149,7 @@
     font-size: 1rem; /* 16px */
     line-height: 1.25rem; /* 20px */
     letter-spacing: -0.01em;
-    color: var(--white);
+    color: white;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
@@ -161,7 +161,7 @@
   .resetButton {
     width: 100%;
     padding: 0.75rem;
-    background-color: #c6b09a;
+    background-color: #c3a27c;
     color: white;
     border: none;
     border-radius: 0.5rem;
@@ -169,6 +169,10 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+  }
+  
+  .resetButton:hover {
+    background-color: #b08f6a;
   }
   
   .resetButton:disabled {
@@ -187,7 +191,6 @@
   .signupPrompt {
     width: 100%;
     text-align: left;
-    font-family: var(--font-montserrat);
     font-weight: 500;
     font-size: 1rem; /* 16px */
     line-height: 1.25rem; /* 20px */

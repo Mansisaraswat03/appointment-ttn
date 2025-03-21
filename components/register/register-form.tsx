@@ -6,25 +6,31 @@ import { useState } from "react";
 import styles from "./register.module.css";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = async(e: React.FormEvent) => {
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-   try{
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/register`,{
-      name,
-      email,
-      password
-     })
-    console.log("Signup successful:", response.data);
-   }catch(error){
-    console.error("Signup error:", error);
-   }
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      console.log("Signup successful:", response.data);
+      handleReset();
+      router.push("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
   };
 
   const handleReset = () => {
@@ -114,14 +120,11 @@ export default function SignupForm() {
                   onClick={() => setShowPassword(!showPassword)}
                   aria-pressed={showPassword}
                 >
-                    {showPassword ?  <EyeOff className={styles.icon}/> : <Eye className={styles.icon}/>}
-                  {/* <Image
-                    src="/images/Eye.svg"
-                    alt={showPassword ? "Hide password" : "Show password"}
-                    width={20}
-                    height={20}
-                    className={styles.inputIcon}
-                  /> */}
+                  {showPassword ? (
+                    <EyeOff className={styles.icon} />
+                  ) : (
+                    <Eye className={styles.icon} />
+                  )}
                 </button>
               </div>
             </div>
