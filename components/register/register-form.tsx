@@ -7,6 +7,7 @@ import styles from "./register.module.css";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from 'react-hot-toast';
 
 export default function SignupForm() {
   const [name, setName] = useState("");
@@ -26,10 +27,11 @@ export default function SignupForm() {
         }
       );
       console.log("Signup successful:", response.data);
+      toast.success("Signup successful");
       handleReset();
       router.push("/login");
-    } catch (error) {
-      console.error("Signup error:", error);
+    } catch (error:any) {
+      toast.error("Signup failed");
     }
   };
 
