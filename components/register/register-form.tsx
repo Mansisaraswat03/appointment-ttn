@@ -5,33 +5,24 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "./register.module.css";
 import { Eye, EyeOff } from "lucide-react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import toast from 'react-hot-toast';
+import { useAuth } from "@/hooks/useAuth";
 
 export default function SignupForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/register`,
-        {
-          name,
-          email,
-          password,
-        }
-      );
-      console.log("Signup successful:", response.data);
-      toast.success("Signup successful");
-      handleReset();
-      router.push("/login");
-    } catch (error:any) {
-      toast.error("Signup failed");
+      await register({ name, email, password }, handleReset);
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,7 +41,7 @@ export default function SignupForm() {
         <div className={styles.formContainer}>
           <h2 className={styles.formTitle}>Sign Up</h2>
           <div className={styles.signupPrompt}>
-            Already a member? <Link href="/auth/login">Login.</Link>
+            Already a member? <Link href="/login">Login.</Link>
           </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>
@@ -131,16 +122,28 @@ export default function SignupForm() {
               </div>
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              Submit
-            </button>
             <button
-              type="button"
-              className={styles.resetButton}
-              onClick={handleReset}
-              disabled={!isFormValid}
+              type="submit"
+              className={styles.submitButton}
+              disabled={!isFormValid || loading}
             >
-              Reset
+              {loading ? (
+                <>
+                  <svg className={styles.loader} viewBox="0 0 50 50">
+                    <circle
+                      className={styles.spinner}
+                      cx="25"
+                      cy="25"
+                      r="20"
+                      fill="none"
+                      strokeWidth="4"
+                    />
+                  </svg>
+                  Signing Up...
+                </>
+              ) : (
+                "Submit"
+              )}
             </button>
           </form>
         </div>

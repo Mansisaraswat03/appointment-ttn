@@ -203,6 +203,40 @@
     color: var(--primary-color);
     text-decoration: none;
   }
+
+  .loader {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    animation: spin 1s linear infinite;
+  }
+  
+  .spinner {
+    stroke: white;
+    stroke-dasharray: 80;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: spinStroke 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spinStroke {
+    0% {
+      stroke-dashoffset: 80;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 80;
+    }
+  }
+  
   
   /* Media Queries */
   @media (max-width: 1024px) {
