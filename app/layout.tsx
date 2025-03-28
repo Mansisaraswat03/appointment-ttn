@@ -5,8 +5,8 @@ import Footer from "@/components/footer/footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: 'MedCare',
-  description: 'Healthcare in Your Hands',
+  title: "MedCare",
+  description: "Healthcare in Your Hands",
 };
 
 export default function RootLayout({
@@ -16,12 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-      >
-        <Navbar/>
+      <body>
+        <Navbar />
         {children}
         <Toaster position="top-right" reverseOrder={false} />
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

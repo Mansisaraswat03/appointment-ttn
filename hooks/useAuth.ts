@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useState, useEffect } from "react";
 
 interface Data {
   name?: string;
@@ -12,25 +13,31 @@ interface Data {
 
 export const useAuth = () => {
   const router = useRouter();
+  const [token, setToken] = useState<string | null>(null);
 
-  const register = async (data:Data, handleReset: () => void) => {
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  const register = async (data: Data, handleReset: () => void) => {
     try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/v1/api/users/register`,
-          {
-            name: data?.name,
-            email: data?.email,
-            password: data?.password,
-          },
-        );
-        console.log("Signup successful:", response.data);
-        toast.success("Signup successful");
-        handleReset();
-        router.push("/login");
-      } catch (error) {
-        toast.error("Signup failed");
-      }
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/v1/api/users/register`,
+        {
+          name: data?.name,
+          email: data?.email,
+          password: data?.password,
+        }
+      );
+      console.log("Signup successful:", response.data);
+      toast.success("Signup successful");
+      handleReset();
+      router.push("/login");
+    } catch (error) {
+      toast.error("Signup failed");
+    }
   };
+
   const login = async (data: Data, handleReset: () => void) => {
     try {
       const response = await axios.post(
@@ -46,7 +53,9 @@ export const useAuth = () => {
 
       toast.success("Login successful");
       handleReset();
-      router.push("/doctors");
+      router.replace("/doctors");
+      checkToken(); 
+      window.location.reload();
       return response.data;
     } catch (error) {
       toast.error("Login failed");
@@ -61,6 +70,7 @@ export const useAuth = () => {
         {},
         { withCredentials: true }
       );
+      setToken(null);
       router.push("/login");
       router.refresh();
     } catch (error) {
@@ -70,5 +80,22 @@ export const useAuth = () => {
     }
   };
 
-  return { login, logout, register };
+  const checkToken = async () => {
+    try {
+      const response = await axios.get(
+        `api/auth/token`,
+        {
+          withCredentials: true,
+        }
+      );
+      setToken(response.data.token);
+      return token;
+    } catch (error) {
+      console.error("Error fetching token:", error);
+      setToken(null);
+      return null;
+    }
+  };
+
+  return { login, logout, register, checkToken, token };
 };

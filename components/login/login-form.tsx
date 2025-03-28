@@ -144,7 +144,7 @@ const Login = () => {
           <button
             type="reset"
             className={styles.resetBtn}
-            disabled={!isFormValid}
+            disabled={!isFormValid || loading}
             onClick={handleReset}
           >
             Reset
