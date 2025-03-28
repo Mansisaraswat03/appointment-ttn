@@ -81,7 +81,6 @@ const FilterSidebar = ({ onFilterChange }: FilterSidebarProps) => {
         </ul>
       </div>
 
-      {/* <button onClick={handleFilterChange} className={styles.resetButton}>Reset</button> */}
     </aside>
   );
 };
