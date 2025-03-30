@@ -4,10 +4,9 @@ import styles from "./FilterSidebar.module.css";
 
 type FilterSidebarProps = {
   onFilterChange: (filterKey: string, filterValue: string, checked: boolean) => void;
-  appliedFilters: Record<string, string | string[]>;
 };
 
-const FilterSidebar = ({ onFilterChange, appliedFilters }: FilterSidebarProps) => {
+const FilterSidebar = ({ onFilterChange}: FilterSidebarProps) => {
   const searchParams = useSearchParams();
 
   const isChecked = (filterKey: string, filterValue: string) => {

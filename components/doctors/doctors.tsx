@@ -9,23 +9,27 @@ import SearchBar from "../SearchBar/SearchBar";
 import DoctorSkeleton from "../skeleton/DoctorSkeleton";
 import styles from "./DoctorPage.module.css";
 import { Doctor } from "@/types/types";
-
+import Pagination from "../pagination/pagination";
+const LIMIT = 9;
 const Doctors = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const filters = Object.fromEntries(searchParams.entries()); 
+  const currentPage = Number(searchParams.get("page")) || 1; 
 
   const fetchDoctors = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/api/doctors`, {
-        params: filters,
+        params: { ...filters, page: currentPage, limit: LIMIT },
       });
       setDoctors(response?.data?.data?.doctors || []);
+      setTotalPages(response?.data?.data?.pagination?.totalPages || 1);
     } catch (error) {
       toast.error("Failed to fetch doctors");
     } finally {
@@ -44,6 +48,7 @@ const Doctors = () => {
     } else {
       params.delete("search");
     }
+    params.set("page", "1");
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
@@ -57,7 +62,7 @@ const Doctors = () => {
       params.delete(filterKey);
       values.forEach(val => params.append(filterKey, val));
     }
-
+    params.set("page", "1");
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
@@ -76,13 +81,13 @@ const Doctors = () => {
 
       <div className={styles.contentWrapper}>
         <aside className={styles.sidebar}>
-          <FilterSidebar onFilterChange={handleFilterChange} appliedFilters={filters} />
+          <FilterSidebar onFilterChange={handleFilterChange} />
         </aside>
 
         <section className={styles.doctorSection}>
           <div className={styles.doctorGrid}>
             {loading && Array.from({ length: 6 }).map((_, index) => <DoctorSkeleton key={index} />)}
-            {!loading && doctors?.length === 0 && <p>No doctors found</p>}
+            {!loading && doctors?.length === 0 && <p className="text-center">No doctors found!</p>}
             {!loading &&
               doctors?.length > 0 &&
               doctors.map((doctor, index) => (
@@ -91,6 +96,7 @@ const Doctors = () => {
           </div>
         </section>
       </div>
+      <Pagination totalPages={totalPages} currentPage={currentPage} />
     </div>
   );
 };
