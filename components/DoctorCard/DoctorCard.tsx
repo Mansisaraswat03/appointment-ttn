@@ -1,18 +1,11 @@
+import { DoctorCardProps } from '@/types/types';
 import styles from './DoctorCard.module.css';
 
-type DoctorCardProps = {
-  name: string;
-  specialty: string;
-  experience: string;
-  rating: number;
-  image: string;
-};
-
-const DoctorCard = ({ name, specialty, experience, rating, image }: DoctorCardProps) => {
+const DoctorCard = ({ name, specialty, experience, rating, profile }: DoctorCardProps) => {
   return (
     <div className={styles.card}>
       <img
-        src={image}
+        src={profile}
         alt={name}
         className={styles.image}
       />
