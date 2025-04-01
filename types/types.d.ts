@@ -1,5 +1,5 @@
 export interface Doctor {
-    id: string;
+    id: number;
     name: string;
     specialty: string;
     experience: number;
@@ -15,6 +15,7 @@ export interface Doctor {
   }
 
  export type DoctorCardProps = {
+    id: number;
     name: string;
     specialty: string;
     experience: number;

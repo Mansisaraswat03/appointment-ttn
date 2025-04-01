@@ -10,7 +10,7 @@ import DoctorSkeleton from "../skeleton/DoctorSkeleton";
 import styles from "./DoctorPage.module.css";
 import { Doctor } from "@/types/types";
 import Pagination from "../pagination/pagination";
-const LIMIT = 9;
+const LIMIT = 6;
 const Doctors = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

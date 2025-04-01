@@ -9,14 +9,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/doctors', request.url));
   }
 
-  if (!token && path.startsWith('/appointments')|| path.startsWith('/book-appointment')) {
+  if (!token && path.startsWith('/book-appointment')) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return NextResponse.next();
 }
 
-// Configure which routes to run middleware on
 export const config = {
   matcher: [
     '/login',
