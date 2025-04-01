@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./DoctorBooking.module.css";
+import { useAuthContext } from "@/context/authContext";
 
 interface Doctor {
   id: number;
@@ -44,6 +45,7 @@ const DoctorBooking = () => {
     contact: "",
   });
   const router =useRouter();
+  const {auth_token} = useAuthContext()
   const handleReset = () => {
     setAppointmentDate("");
     setAppointmentTime("");
@@ -138,8 +140,7 @@ const DoctorBooking = () => {
         payload,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTc0MzQ0NjgxNywiZXhwIjoxNzQzNTMzMjE3fQ.dzYvpaBXRyf2M2A1ZBS-RiT4I18FTdhMtvOPv53fJq8",
+            Authorization: `Bearer ${auth_token}`,
             "Content-Type": "application/json",
           },
         }

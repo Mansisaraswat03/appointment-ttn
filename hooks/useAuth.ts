@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState, useEffect } from "react";
+import { useAuthContext } from "@/context/authContext";
 
 interface Data {
   name?: string;
@@ -14,7 +15,7 @@ interface Data {
 export const useAuth = () => {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
-
+  const { setAuthToken } = useAuthContext();
   useEffect(() => {
     checkToken();
   }, []);
@@ -71,6 +72,7 @@ export const useAuth = () => {
         { withCredentials: true }
       );
       setToken(null);
+      setAuthToken(null);
       router.push("/login");
       router.refresh();
     } catch (error) {
@@ -89,10 +91,12 @@ export const useAuth = () => {
         }
       );
       setToken(response.data.token);
+      setAuthToken(response.data.token);
       return token;
     } catch (error) {
       console.error("Error fetching token:", error);
       setToken(null);
+      setAuthToken(null);
       return null;
     }
   };

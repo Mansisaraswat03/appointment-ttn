@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/authContext";
 
 export const metadata: Metadata = {
   title: "MedCare",
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <AuthProvider>
         <Navbar />
-        {children}
+        <main className="min-h-screen">{children}</main>
         <Toaster position="top-right" reverseOrder={false} />
         <Footer />
+      </AuthProvider>
       </body>
     </html>
   );
